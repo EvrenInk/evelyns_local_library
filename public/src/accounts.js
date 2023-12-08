@@ -8,16 +8,12 @@ function sortAccountsByLastName(accounts) {
   );
 }
 
-function getTotalNumberOfBorrows(account, books) {
-  let total = 0;
-  const idToMatch = account.id;
-  books.forEach(book => { 
+function getTotalNumberOfBorrows(account, books) { //RELEARNED REDUCE() AND I KINDA GET IT NOW!
+  return books.reduce((total, book) => {
     const borrows = book.borrows;
-    borrows.forEach(borrow => {
-      if (borrow.id === idToMatch) total += 1;
-    })
-  })
-  return total;
+    const borrowCount = borrows.filter((borrow) => borrow.id === account.id).length; //i honestly didn't even know that i never used filter
+    return total + borrowCount;
+  }, 0);
 }
 
 function getBooksPossessedByAccount(account, books, authors) {
